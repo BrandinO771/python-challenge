@@ -1,7 +1,7 @@
 
 '''
-PyPoll
-
+PYTHON HW   PyPoll  BRANDON STEINKE   8-12-19
+======================================================================================= 
 ![Vote-Counting](Images/Vote_counting.png)
 
 * In this challenge, you are tasked with helping a small, rural town modernize its vote-counting process. 
@@ -23,6 +23,9 @@ Your task is to create a Python script that analyzes the votes and calculates ea
 
 import os
 import csv
+
+''' VARIABLES 
+========================================================================'''
 
 total_votes = 0 
 cand_name_list = []
@@ -50,13 +53,16 @@ t_votes_per_cand = []
 winner = str("")
 final_list_zipped = ()
 
+''' OPEN DATA ORGANIZE INTO LISTS 
+========================================================================'''
+
 file_to_analyze = os.path.join(".", "resources", "election_data.csv")
 
 with open(file_to_analyze, newline="", encoding='utf-8') as csvfile :
     temp_csv_data_table = csv.reader(csvfile, delimiter=",")
     csv_header = next(temp_csv_data_table )
 
-    # pull data and create custom lists 
+
     for column in  temp_csv_data_table :
         cand_name_list.append(column[2]) 
 
@@ -68,8 +74,11 @@ with open(file_to_analyze, newline="", encoding='utf-8') as csvfile :
             li_list.append(column[2])
         if column[2] == "O'Tooley" :
             otooley_list.append(column[2])
+            
 
-# All Calcs 
+''' All CALCS / FORMATTING 
+========================================================================'''
+
 total_votes = (len(cand_name_list))
 testcount = total_votes + total_votes
 
@@ -94,7 +103,9 @@ li_perc = li_count/ total_votes
 i_p = "{:.3%}".format(li_perc)
 
 
-# Organize Final Lists  
+''' Organize Final Lists  
+========================================================================'''
+
 header_list = [ "Candidate","Vote %", "(Total Votes)"]
 cand_name_list = ["  Khan    ", "  Correy  ",  "  Li      ","  O'Tooley "]
 count_List_calc = [ khan_count, correy_count, li_count, otooley_count]                                                           
@@ -103,7 +114,9 @@ count_list = [k_count_form, c_ct_form, li_ct_form, ot_ct_form,  ]
 final_list_zipped = zip( cand_name_list, perc_list, count_list )
 
 
-# Find Winner using new list above 
+''' Find Winner using new list above 
+========================================================================'''
+
 winner_val = count_List_calc[3]
 index_ctr = -1
 index_pos = 0 
@@ -116,7 +129,9 @@ for x in count_List_calc  :
 winner = cand_name_list[index_pos]
 
 
-# Terminal Print out 
+''' Terminal Print out 
+========================================================================'''
+
 print( "Election Results")
 print("------------------------------------------")
 print("Total Votes Cast : "  + str(total_votes) )
@@ -131,7 +146,10 @@ print("Winner of the Election is : " + winner )
 print("------------------------------------------")
 print()
 
-# Final data / commands for output file
+
+''' Final data / commands for output file
+========================================================================'''
+
 totalVotesLine = ["Total Votes Cast : ",  total_votes]
 winnerLine = ["Winner of the Election is : ",  winner ]
 data_table_to_insert = zip( cand_name_list, perc_list, count_List_calc )  
@@ -150,7 +168,9 @@ print("your csv is now complete")
 
 '''
 EXAMPLE OUTPUT BELOW 
-text
+========================================================================
+
+
 Election Results
 -------------------------
 Total Votes: 3521001
